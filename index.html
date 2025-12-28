@@ -393,17 +393,25 @@
             }
         });
 
-        document.querySelectorAll('.lang-option').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentLang = btn.dataset.lang;
-                usedQuestions = [];
-                document.getElementById('currentLangFlag').textContent = btn.dataset.flag;
-                document.getElementById('currentLangText').textContent = langNames[currentLang];
-                menuOpen = false;
-                document.getElementById('langMenu').classList.add('hidden');
-            });
-        });
+document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        currentLang = btn.dataset.lang;
+        usedQuestions = [];
+        showQuestion = false;     
+        currentQuestion = '';
+
+        document.getElementById('currentLangFlag').textContent = btn.dataset.flag;
+        document.getElementById('currentLangText').textContent = langNames[currentLang];
+
+        menuOpen = false;
+        document.getElementById('langMenu').classList.add('hidden');
+
+        render(); 
+    });
+});
+
 
         function drawQuestion() {
             const availableQuestions = questions[currentLang].filter(q => !usedQuestions.includes(q));
